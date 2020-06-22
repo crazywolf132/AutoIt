@@ -13,112 +13,65 @@
   <h1>Please search for a location first</h1>
 </main>
 <main id="loadedContent" *ngIf="loaded">
-  <div class="days">
-    <h2 class="subHeader active">
-      {{ searchLocation }}
-    </h2>
-  </div>
-  <div class="hourly">
-    <span class="title">Next 12 hours</span>
-    <div class="scrollable">
-      <div class="card selected">
-        <span class="time">Now</span>
-        <div class="icon">
-          <svg
-            width="32"
-            height="32"
-            viewBox="0 0 32 32"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M16 14.4V24.5333"
-              stroke="black"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M21.3333 28.2667C21.3333 29.7394 20.1394 30.9333 18.6667 30.9333V30.9333C17.1939 30.9333 16 29.7394 16 28.2667V24"
-              stroke="black"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M16 1.06667V3.2"
-              stroke="black"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M5.86668 14.9333C7.46968 14.932 8.96705 15.7327 9.85601 17.0667H11.4027C12.3608 15.4373 14.1098 14.4368 16 14.4368C17.8902 14.4368 19.6392 15.4373 20.5973 17.0667H22.144C23.0349 15.7352 24.5313 14.936 26.1333 14.936C27.7354 14.936 29.2318 15.7352 30.1227 17.0667H30.9333C30.9333 8.82133 24.2453 3.2 16 3.2C7.75468 3.2 1.06668 8.82133 1.06668 17.0667H1.87735C2.76632 15.7327 4.26368 14.932 5.86668 14.9333Z"
-              stroke="black"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-        </div>
-        <span class="temp"
-          >{{ convertTemp(hourlyWeather[0].temperature) }}°{{
+  <div class="topGroup">
+    <div class="dayCard">
+      <div class="group">
+        <span class="temperature"
+          >{{ convertTemp(loadedWeather[0].temperatureMax) }}°{{
             useCelsius ? "C" : "F"
           }}</span
         >
+        <i
+          [ngClass]="'wi ' + getWeatherIcon(loadedWeather[0].icon)"
+          id="tempIcon"
+        ></i>
       </div>
-      <div
-        class="card"
-        *ngFor="let weather of hourlyWeather | slice: 1; let i = index"
-      >
-        <span class="time">{{ getHour(weather.time) }}</span>
-        <div class="icon">
-          <svg
-            width="32"
-            height="32"
-            viewBox="0 0 32 32"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M16 14.4V24.5333"
-              stroke="black"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M21.3333 28.2667C21.3333 29.7394 20.1394 30.9333 18.6667 30.9333V30.9333C17.1939 30.9333 16 29.7394 16 28.2667V24"
-              stroke="black"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M16 1.06667V3.2"
-              stroke="black"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M5.86668 14.9333C7.46968 14.932 8.96705 15.7327 9.85601 17.0667H11.4027C12.3608 15.4373 14.1098 14.4368 16 14.4368C17.8902 14.4368 19.6392 15.4373 20.5973 17.0667H22.144C23.0349 15.7352 24.5313 14.936 26.1333 14.936C27.7354 14.936 29.2318 15.7352 30.1227 17.0667H30.9333C30.9333 8.82133 24.2453 3.2 16 3.2C7.75468 3.2 1.06668 8.82133 1.06668 17.0667H1.87735C2.76632 15.7327 4.26368 14.932 5.86668 14.9333Z"
-              stroke="black"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-        </div>
-        <span class="temp"
-          >{{ convertTemp(weather.temperature) }}°{{
+      <span class="info"
+        >Today, is currently
+        <span class="keyword">{{ getWeatherType(loadedWeather[0].icon) }}</span>
+        . It’s
+        <span class="keyword"
+          >{{ convertTemp(loadedWeather[0].temperatureMax) }}°{{
             useCelsius ? "C" : "F"
           }}</span
         >
+        and the high will be
+        <span class="keyword"
+          >{{ convertTemp(loadedWeather[0].temperatureMax) }}°{{
+            useCelsius ? "C" : "F"
+          }}</span
+        >.</span
+      >
+      <span class="location">{{ searchLocation }}</span>
+    </div>
+    <div class="hourly">
+      <span class="title">Next 12 hours</span>
+      <div class="scrollable">
+        <div class="card selected">
+          <span class="time">Now</span>
+          <div class="icon">
+            <i [ngClass]="'wi ' + getWeatherIcon(hourlyWeather[0].icon)"></i>
+          </div>
+          <span class="temp"
+            >{{ convertTemp(hourlyWeather[0].temperature) }}°{{
+              useCelsius ? "C" : "F"
+            }}</span
+          >
+        </div>
+        <div
+          class="card"
+          *ngFor="let weather of hourlyWeather | slice: 1; let i = index"
+        >
+          <span class="time">{{ getHour(weather.time) }}</span>
+          <div class="icon">
+            <i [ngClass]="'wi ' + getWeatherIcon(weather.icon)"></i>
+          </div>
+          <span class="temp"
+            >{{ convertTemp(weather.temperature) }}°{{
+              useCelsius ? "C" : "F"
+            }}</span
+          >
+        </div>
       </div>
     </div>
   </div>
@@ -129,51 +82,19 @@
         <span class="weatherType">{{ getWeatherType(weather.icon) }} </span>
         <span class="weatherDate">{{ getDay(i) }}</span>
       </div>
-      <span class="temp"
-        >{{ convertTemp(weather.temperatureMin) }}°{{
-          useCelsius ? "C" : "F"
-        }}</span
-      >
+      <div class="group">
+        <span class="temp"
+          >{{ convertTemp(weather.temperatureMax) }}°{{
+            useCelsius ? "C" : "F"
+          }}
+        </span>
+        <i [ngClass]="'wi ' + getWeatherIcon(weather.icon)" id="tempIcon"></i>
+      </div>
+
       <span class="rainChance"
-        >{{ weather.precipProbability * 100 | number: "1.0-0" }}%<svg
-          style="margin-left: 25px;"
-          width="32"
-          height="32"
-          viewBox="0 0 32 32"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M16 14.4V24.5333"
-            stroke="black"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-          <path
-            d="M21.3333 28.2667C21.3333 29.7394 20.1394 30.9333 18.6667 30.9333V30.9333C17.1939 30.9333 16 29.7394 16 28.2667V24"
-            stroke="black"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-          <path
-            d="M16 1.06667V3.2"
-            stroke="black"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-          <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
-            d="M5.86668 14.9333C7.46968 14.932 8.96705 15.7327 9.85601 17.0667H11.4027C12.3608 15.4373 14.1098 14.4368 16 14.4368C17.8902 14.4368 19.6392 15.4373 20.5973 17.0667H22.144C23.0349 15.7352 24.5313 14.936 26.1333 14.936C27.7354 14.936 29.2318 15.7352 30.1227 17.0667H30.9333C30.9333 8.82133 24.2453 3.2 16 3.2C7.75468 3.2 1.06668 8.82133 1.06668 17.0667H1.87735C2.76632 15.7327 4.26368 14.932 5.86668 14.9333Z"
-            stroke="black"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
+        >{{ weather.precipProbability * 100 | number: "1.0-0" }}%<i
+          class="wi wi-umbrella"
+        ></i>
       </span>
     </div>
   </section>
