@@ -91,11 +91,17 @@
         <i [ngClass]="'wi ' + getWeatherIcon(weather.icon)" id="tempIcon"></i>
       </div>
 
-      <span class="rainChance"
-        >{{ weather.precipProbability * 100 | number: "1.0-0" }}%<i
-          class="wi wi-umbrella"
-        ></i>
-      </span>
+      <div class="group">
+        <span class="rainChance"
+          >{{ weather.precipProbability * 100 | number: "1.0-0" }}%<i
+            class="wi wi-umbrella"
+          ></i>
+        </span>
+        <span class="windStrength">
+          {{ weather.windSpeed }} {{ useCelsius ? "km/h" : "mph" }}
+          <i class="wi wi-strong-wind"></i>
+        </span>
+      </div>
     </div>
   </section>
 </main>
