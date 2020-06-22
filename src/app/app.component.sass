@@ -6,12 +6,21 @@
 header
     display: flex
     height: 180px
+
+    @include mobile-only
+        flex-direction: column
+
     .title
         flex: 1
         margin-top: 60px
         margin-left: 100px
         font-size: 50px
         font-weight: bold
+        color: #000
+
+        @include tablet-only
+            margin-left: 50px
+
     .searchBox
         margin-top: 63px
         margin-right: 100px
@@ -23,6 +32,16 @@ header
         height: 50px
         background: #E8E8E8
         text-align: center
+
+        @include mobile-only
+            width: calc(100% - 32px)
+            margin-top: 0px
+            margin-bottom: 32px
+            padding: 16px
+
+        @include tablet-only
+            margin-right: 50px
+            margin-left: 75px
 
 .title
     margin-top: 35px
@@ -42,6 +61,15 @@ header
     border-radius: 17px
     margin-bottom: 50px
 
+    @include mobile-only
+        width: 100%
+        text-align: center
+        border-radius: 0px
+        margin-top: 32px
+
+    @include tablet-only
+        width: 90%
+
     h1
         color: #7F7F7F
         font-size: 35px
@@ -55,6 +83,18 @@ header
         display: flex
         margin-left: 100px
 
+        @include mobile-only
+            flex-direction: column
+            justify-content: center
+            align-items: center
+            margin: 25px 0px
+
+        @include tablet-only
+            flex-direction: column
+            justify-content: center
+            align-items: center
+            margin: 0
+
         .dayCard
             flex: 3
             margin-top: 20px
@@ -65,6 +105,11 @@ header
             box-shadow: 5px 10px 50px rgba(0, 0, 0, 0.1)
             display: flex
             flex-direction: column
+
+            @include tablet-only
+                flex: 1
+                width: calc(100% - 210px)
+                height: 25%
 
             .group
                 display: flex
@@ -96,6 +141,9 @@ header
                 text-align: center
                 font-weight: bold
 
+                @include tablet-only
+                    margin: 0px 50px 40px 50px
+
             #tempIcon
                 margin-top: 30px
                 margin-right: 60px
@@ -115,6 +163,12 @@ header
             justify-content: center
             align-items: center
 
+            @include mobile-only
+                display: none
+
+            @include tablet-only
+                margin: 20px 0px
+
             .title
                 margin: 25px
                 margin-bottom: 0px
@@ -127,6 +181,9 @@ header
                 display: flex
                 overflow-x: auto
                 max-width: calc(100% - 100px)
+
+                @include tablet-only
+                    max-width: calc(100% - 15px)
 
                 .card
                     display: flex
@@ -163,6 +220,9 @@ header
         display: flex
         flex-wrap: wrap
         margin: 15px 100px 25px 80px
+
+        @include mobile-only
+            margin: 15px 10px 10px 10px
 
         .card
             flex: 1 0 21%
@@ -208,6 +268,9 @@ header
                 margin-left: 25px
                 font-size: 45px
 
+                @include mobile-only
+                    margin-right: 30px
+
             .rainChance
                 font-weight: bold
                 font-size: 20px
@@ -227,6 +290,9 @@ footer
     align-items: center
     margin: 0 auto
 
+    @include mobile-only
+        margin: 25px auto
+
     .poweredby
         flex: 8
         text-align: center
@@ -236,9 +302,15 @@ footer
             color: #7F7F7F
             font-weight: bold
 
+        @include mobile-only
+            margin-top: 25px
+
     .sliderZone
         flex: 1
         display: flex
+
+        @include mobile-only
+            margin-top: 25px
 
         .tempSpan
             margin: 8px
@@ -297,3 +369,9 @@ footer
         font-weight: bold
         font-size: 20px
         color: #0076FF
+
+        @include mobile-only
+            display: none
+
+        @include tablet-only
+            display: none
