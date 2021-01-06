@@ -21,7 +21,7 @@
     "@angular/platform-browser-dynamic": "~9.1.11",
     "@angular/router": "~9.1.11",
     "@jungla/language": "^0.0.6",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "fs": "^0.0.1-security",
     "rxjs": "~6.5.4",
     "skycons": "^1.0.0",
